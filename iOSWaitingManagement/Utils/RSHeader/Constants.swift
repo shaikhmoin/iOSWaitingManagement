@@ -61,14 +61,13 @@ struct CONSTANTS {
     
     //MARK: UITableViewCell IDENTIFIER
     static let ID_CUSTOMR_LIST_TABLE_CELL = "CustomerListTableViewCell"
-    static let ID_CUSTOMR_SUGGESTION_LIST_TABLE_CELL = "CustomerSuggestionTableViewCell"
     
     //MARK: UICllectionViewCell IDENTIFIER
-    static let ID_ASSIGN__TABLE_LIST_COLLECTION_CELL = "AssignTableCollectionViewCell"
+    static let ID_ASSIGN__TABLE_LIST_COLLECTION_CELL_IPHONE = "AssignTableCollectionViewCelliPhone"
     
     //MARK: TRY AT HOME COLORS
-    static let APP_PRIMARY_LIGHT_COLOR = "#4BB9DA"
-    static let APP_MAIN_HOME_BUTTON_COLOR = "#70D2E2"    
+    static let APP_PRIMARY_MAIN_COLOR = "#006AB7"
+    static let APP_PRIMARY_LIGHT_COLOR = "006AB7"
 }
 
 //MARK: - MANAGERS
@@ -228,23 +227,35 @@ class ResolutePOS: NSObject {
     
     struct DeviceType
     {
-        static let IS_IPHONE_4_OR_LESS  = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH < 568.0
-        static let IS_IPHONE_5          = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 568.0
-        static let IS_IPHONE_6_7          = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 667.0
-        static let IS_IPHONE_6P_7P         = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 736.0
-        static let IS_IPAD              = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1024.0
-        static let IS_IPAD_PRO          = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1366.0
+        static let IS_iPAD             = UIDevice.current.userInterfaceIdiom == .pad
+        static let IS_IPHONE           = UIDevice.current.userInterfaceIdiom == .phone
+        static let IS_RETINA           = UIScreen.main.scale >= 2.0
+        static let IS_TV               = UIDevice.current.userInterfaceIdiom == .tv
+        static let IS_CARPLAY          = UIDevice.current.userInterfaceIdiom == .carPlay
+        
+        static let IS_IPHONE_4_OR_LESS               = IS_IPHONE && ScreenSize.SCREEN_MAX_LENGTH < 568.0
+        static let IS_IPHONE_5_SE                    = IS_IPHONE && ScreenSize.SCREEN_MAX_LENGTH == 568.0
+        static let IS_IPHONE_6_7_8_6S                = IS_IPHONE && ScreenSize.SCREEN_MAX_LENGTH == 667.0
+        static let IS_IPHONE_6P_7P_8P_6SP            = IS_IPHONE && ScreenSize.SCREEN_MAX_LENGTH == 736.0
+        static let IS_IPHONE_X                       = IS_IPHONE && ScreenSize.SCREEN_MAX_LENGTH == 812.0
+        static let IS_IPAD_9_7 /* Air2 - Pro 9.7*/  = IS_iPAD   && ScreenSize.SCREEN_MAX_LENGTH == 1024.0
+        static let IS_IPAD_PRO_10_5                  = IS_iPAD   && ScreenSize.SCREEN_MAX_LENGTH == 1112.0
+        static let IS_IPAD_PRO_12_9                  = IS_iPAD   && ScreenSize.SCREEN_MAX_LENGTH == 1366.0
+        static let IS_TV_SERIES                      = IS_TV
+        static let IS_CAR_PLAY                       = IS_CARPLAY
     }
     
     class func getStoryBoard() -> UIStoryboard {
         let storyBoard: UIStoryboard!
         
-        if DeviceType.IS_IPAD {
+        if DeviceType.IS_iPAD {
+            print(ScreenSize.SCREEN_MAX_LENGTH)
             storyBoard = UIStoryboard(name: "iPad", bundle: nil)
-        } else {
+      
+        }  else {
+            print(ScreenSize.SCREEN_MAX_LENGTH)
             storyBoard = UIStoryboard(name: "Main", bundle: nil)
         }
-        
         return storyBoard
     }
     
@@ -254,7 +265,7 @@ class ResolutePOS: NSObject {
         var strValue: String = ""
         if (dict[key] as? String) != nil  {
             strValue = dict[key] as! String
-        }else if (dict[key] as? String) == "0" {
+        } else if (dict[key] as? String) == "0" {
             strValue = "0"
         }
         else if (dict[key] as? Int) != nil {

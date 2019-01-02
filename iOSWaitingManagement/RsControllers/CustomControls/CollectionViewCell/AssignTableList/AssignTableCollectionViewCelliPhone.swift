@@ -1,14 +1,14 @@
 //
-//  AssignTableCollectionViewCell.swift
+//  AssignTableCollectionViewCelliPhone.swift
 //  iOSWaitingManagement
 //
-//  Created by Akash on 12/29/18.
-//  Copyright © 2018 Moin. All rights reserved.
+//  Created by Akash on 1/2/19.
+//  Copyright © 2019 Moin. All rights reserved.
 //
 
 import UIKit
 
-class AssignTableCollectionViewCell: UICollectionViewCell {
+class AssignTableCollectionViewCelliPhone: UICollectionViewCell {
     
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var imgTable: UIImageView!

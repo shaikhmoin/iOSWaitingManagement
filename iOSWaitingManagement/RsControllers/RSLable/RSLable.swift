@@ -14,7 +14,7 @@ class RSTitleLable: UILabel {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         
-        self.backgroundColor = UIColor(hexString: CONSTANTS.APP_PRIMARY_LIGHT_COLOR)
+        self.backgroundColor = UIColor(hexString: CONSTANTS.APP_PRIMARY_MAIN_COLOR)
         self.font = UIFont.appFont_LatoBold_WithSize(16.0)
         self.textColor = UIColor.white
         self.textAlignment = NSTextAlignment.center
@@ -26,7 +26,11 @@ class RSCustomerTitleLable: UILabel {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         
-        self.font = UIFont.appFont_LatoRegular_WithSize(14)
+        if ResolutePOS.DeviceType.IS_iPAD {
+            self.font = UIFont.appFont_LatoRegular_WithSize(14)
+        } else {
+            self.font = UIFont.appFont_LatoRegular_WithSize(12)
+        }
         self.textColor = UIColor.black
         self.textAlignment = NSTextAlignment.center
     }

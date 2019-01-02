@@ -9,6 +9,15 @@
 import Foundation
 import UIKit
 
+class RSBackView: UIView {
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+         self.backgroundColor = UIColor(hexString: CONSTANTS.APP_PRIMARY_LIGHT_COLOR)
+    }
+}
+
 class RSBorderView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
@@ -19,3 +28,6 @@ class RSBorderView: UIView {
         self.applyShadowDefault()
     }
 }
+
+
+

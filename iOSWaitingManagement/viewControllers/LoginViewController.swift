@@ -137,8 +137,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
         var popupWidth: Int = 0
         var popupHeight: Int = 0
         
-        popupWidth = 550
-        popupHeight = 200
+        if ResolutePOS.DeviceType.IS_iPAD {
+            popupWidth = 520
+            popupHeight = 210
+        } else {
+            popupWidth = 300
+            popupHeight = 180
+        }
         
         var x:Int = Int(UIScreen.main.bounds.width)
         var y:Int = Int(UIScreen.main.bounds.height)

@@ -29,10 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.createDatabase()
         
         // Open IPAD and IPHONE screen
-//        let storyboard = ResolutePOS.getStoryBoard()
-//        let viewControllerVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-//        let navigationVC = UINavigationController(rootViewController: viewControllerVC)
-//        self.window?.rootViewController = navigationVC
+        let storyboard = ResolutePOS.getStoryBoard()
+        let viewControllerVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        let navigationVC = UINavigationController(rootViewController: viewControllerVC)
+        self.window?.rootViewController = navigationVC
         
         return true
     }

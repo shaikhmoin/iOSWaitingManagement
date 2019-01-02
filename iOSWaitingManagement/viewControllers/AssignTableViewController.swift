@@ -29,9 +29,10 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
         
         cltnTableList.dataSource = self
         cltnTableList.delegate = self
-        self.cltnTableList.register(UINib(nibName:"AssignTableCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: CONSTANTS.ID_ASSIGN__TABLE_LIST_COLLECTION_CELL)
-        txtFloorList.setTextFieldType(tFieldType: .Floor)
         
+        self.cltnTableList.register(UINib(nibName:"AssignTableCollectionViewCelliPhone", bundle: nil), forCellWithReuseIdentifier: CONSTANTS.ID_ASSIGN__TABLE_LIST_COLLECTION_CELL_IPHONE)
+        
+        txtFloorList.setTextFieldType(tFieldType: .Floor)
         self.serviceCallForFloorList()
         
         //Category Mapping Floor List Done Click
@@ -46,8 +47,12 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
         // Dispose of any resources that can be recreated.
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
+    //    override var prefersStatusBarHidden: Bool {
+    //        return true
+    //    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     //MARK:- UICollection View Datasource Methods
@@ -61,7 +66,7 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let AssignTableCell = cltnTableList.dequeueReusableCell(withReuseIdentifier: CONSTANTS.ID_ASSIGN__TABLE_LIST_COLLECTION_CELL, for: indexPath) as! AssignTableCollectionViewCell
+        let AssignTableCell = cltnTableList.dequeueReusableCell(withReuseIdentifier: CONSTANTS.ID_ASSIGN__TABLE_LIST_COLLECTION_CELL_IPHONE, for: indexPath) as! AssignTableCollectionViewCelliPhone
         
         AssignTableCell.applyShadowDefault()
         AssignTableCell.viewMain.applyShadowDefault()
@@ -81,10 +86,10 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = collectionView.frame.size.width
-        if width < 820.0 {
-            return CGSize(width: (width/4) - 10, height:180)
-        } else {
+        if ResolutePOS.DeviceType.IS_iPAD  {
             return CGSize(width: (width/4) - 20, height:180)
+        } else {
+            return CGSize(width: (width/2) - 10, height:180)
         }
     }
     

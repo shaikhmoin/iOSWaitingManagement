@@ -11,19 +11,14 @@ import UIKit
 class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate {
     
     @IBOutlet var viewAddCustomer: RSBorderView!
-    @IBOutlet var viewCustomerList: RSBorderView!
-    @IBOutlet weak var viewCustomerSuggestionList: RSBorderView!
     @IBOutlet weak var txtCustName: RSTextField!
     @IBOutlet weak var txtCustNo: RSTextField!
     @IBOutlet weak var txtNoOfPax: RSTextField!
     @IBOutlet weak var tblCustomerList: UITableView!
-    @IBOutlet weak var tblCustomerSuggestion: UITableView!
     
     var dimView:UIView?
     var aryDispCustomerList : [AnyObject] = [AnyObject]()
     var strTemp : String = ""
-    var aryFilterCustomerList : [AnyObject] = [AnyObject]()
-    var aryObjCustomerList : [AnyObject] = [AnyObject]()
     var strCustomerAccountID : String = "0"
     
     //MARK:- UIView Life Cycle Methods
@@ -33,26 +28,16 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         self.navigationController?.isNavigationBarHidden = true
         tblCustomerList.dataSource = self
         tblCustomerList.delegate = self
-        tblCustomerSuggestion.dataSource = self
-        tblCustomerSuggestion.delegate = self
         txtCustNo.delegate = self
         txtCustName.delegate = self
         txtNoOfPax.delegate = self
         
-        self.tblCustomerList.register(UINib(nibName: "CustomerListTableViewCell", bundle: nil), forCellReuseIdentifier: CONSTANTS.ID_CUSTOMR_LIST_TABLE_CELL)
-        self.tblCustomerSuggestion.register(UINib(nibName: "CustomerSuggestionTableViewCell", bundle: nil), forCellReuseIdentifier: CONSTANTS.ID_CUSTOMR_SUGGESTION_LIST_TABLE_CELL)
-        
         tblCustomerList.rowHeight = UITableViewAutomaticDimension
-        tblCustomerList.estimatedRowHeight = 100
-        
-        tblCustomerSuggestion.rowHeight = UITableViewAutomaticDimension
-        tblCustomerSuggestion.estimatedRowHeight = 100
-        
+        tblCustomerList.estimatedRowHeight = 120
         tblCustomerList.tableFooterView = UIView()
-        tblCustomerSuggestion.tableFooterView = UIView()
         
         self.addPropertyPopupFunctionForAddCustomer()
-        self.addPropertyPopupFunctionForCustomerList()
+        self.setupCustData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,8 +45,12 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         // Dispose of any resources that can be recreated.
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
+//    override var prefersStatusBarHidden: Bool {
+//        return true
+//    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     //UITextfield Delegate Methods
@@ -103,40 +92,6 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             }
             return true
         }
-        
-        //Customer Name
-        if textField == txtCustName
-        {
-            if (textField.text?.characters.count)! == 1 && string == "" {
-                aryFilterCustomerList = aryObjCustomerList
-                if self.aryFilterCustomerList.count > 0 {
-                    self.viewCustomerSuggestionList.isHidden = true
-                } else {
-                    self.viewCustomerSuggestionList.isHidden = false
-                }
-                self.tblCustomerSuggestion.reloadData()
-                return true
-            }
-            
-            if string == ""
-            {
-                strTemp = (textField.text?.substring(to: (textField.text?.index(before: (textField.text?.endIndex)!))!))!
-            }
-            else {
-                strTemp = textField.text! + string
-            }
-            
-            let preda = NSPredicate(format: "Name CONTAINS[c] '\(strTemp)'")
-            aryFilterCustomerList = aryObjCustomerList.filter { preda.evaluate(with: $0) }
-            if self.aryFilterCustomerList.count > 0 {
-                viewCustomerSuggestionList.isHidden = false
-                
-            } else {
-                viewCustomerSuggestionList.isHidden = true
-            }
-            self.tblCustomerSuggestion.reloadData()
-            return true
-        }
         return true
     }
     
@@ -148,8 +103,6 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tblCustomerList {
             return aryDispCustomerList.count
-        } else if tableView == tblCustomerSuggestion {
-            return aryFilterCustomerList.count
         }
         return 0
     }
@@ -159,52 +112,20 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             let customerListCell = tblCustomerList.dequeueReusableCell(withIdentifier: CONSTANTS.ID_CUSTOMR_LIST_TABLE_CELL, for: indexPath) as! CustomerListTableViewCell
             
             if aryDispCustomerList.count > 0 {
-                customerListCell.setUpCustomerData(modelData: aryDispCustomerList[indexPath.row] as! [String : AnyObject])
+                customerListCell.setUpCustomerListData(modelData: aryDispCustomerList[indexPath.row] as! [String : AnyObject])
             }
             
             customerListCell.btnAssign.tag = indexPath.row
             customerListCell.btnAssign.addTarget(self, action: #selector(self.btnAssignTableClick), for: .touchUpInside)
             
             return customerListCell
-            
-        } else if tableView == tblCustomerSuggestion {
-            let custSuggestionListCell = tblCustomerSuggestion.dequeueReusableCell(withIdentifier: CONSTANTS.ID_CUSTOMR_SUGGESTION_LIST_TABLE_CELL, for: indexPath) as! CustomerSuggestionTableViewCell
-            
-            if aryFilterCustomerList.count > 0 {
-                custSuggestionListCell.setUpCustomerData(modelData: aryFilterCustomerList[indexPath.row] as! [String : AnyObject])
-            }
-            return custSuggestionListCell
         }
         return UITableViewCell()
     }
     
     //MARK:- UITableview Delegate Methods
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == tblCustomerSuggestion {
-            
-            if aryFilterCustomerList.count > 0 {
-                let dictData : [String:AnyObject] = aryFilterCustomerList[indexPath.row] as! [String:AnyObject]
-                print(dictData)
-                
-                let accountID = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dictData, key: "ID")
-                let custName = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dictData, key: "Name")
-                let custNo = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dictData, key: "ContactNo")
-                
-                self.strCustomerAccountID = accountID
-                self.txtCustNo.text = custNo
-                self.txtCustName.text = custName
-                
-                self.txtCustNo.resignFirstResponder()
-                self.txtCustName.resignFirstResponder()
-                viewCustomerSuggestionList.isHidden = true
-            }
-        }
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == tblCustomerList {
-            return UITableViewAutomaticDimension
-        } else if tableView == tblCustomerSuggestion {
             return UITableViewAutomaticDimension
         }
         return 0
@@ -219,20 +140,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     //MARK:- Button Open Customer Popup Click
     @IBAction func btnOpenCustomerClick(_ sender: Any) {
         self.popUpShow(popupView: viewAddCustomer)
-        self.helperForGetCustList()
-    }
-    
-    //MARK:- Button Open Customer List Popup Cl;ick
-    @IBAction func btnOpenCustListClick(_ sender: Any) {
-        let query = String(format: "select * from CustomerMaster")
-        self.aryDispCustomerList = obj.getDynamicTableData(query: query)
-        
-        if self.aryDispCustomerList.count > 0 {
-            self.popUpShow(popupView: viewCustomerList)
-            tblCustomerList.reloadData()
-        } else {
-            RSAlertUtils.displayAlertWithMessage("You have no any customer!")
-        }
+        txtCustNo.becomeFirstResponder()
     }
     
     //MARK:- Button Hide Popupick Click
@@ -241,25 +149,15 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         self.helperForClearTextFieldData()
     }
     
-    //MARK:- Button Hide Cust List Popupick Click
-    @IBAction func btnBackCustListClick(_ sender: Any) {
-        self.popUpHide(popupView: viewCustomerList)
-    }
-    
-    //MARK:- Button Hide Customer List Click
-    @IBAction func btnBackCustomerListClick(_ sender: Any) {
-        viewCustomerSuggestionList.isHidden = true
-    }
-    
     //MARK:- Button Save Customer Click
     @IBAction func btnSaveCustomerClick(_ sender: Any) {
-        if txtCustName.text == "" {
-            RSAlertUtils.displayAlertWithMessage("Please Enter Customer Name!")
-        } else if txtCustNo.text == "" {
+        if txtCustNo.text == "" {
             RSAlertUtils.displayAlertWithMessage("Please Enter Customer Contact Number!")
         } else if txtCustNo.text!.count != 10 {
             RSAlertUtils.displayAlertWithMessage("Please Enter Valid Contact Number!")
-        } else if txtNoOfPax.text == "" {
+        } else if txtCustName.text == "" {
+            RSAlertUtils.displayAlertWithMessage("Please Enter Customer Name!")
+        }   else if txtNoOfPax.text == "" {
             RSAlertUtils.displayAlertWithMessage("Please Enter No Of Pax!")
         } else {
             self.insertCustomerHelper()
@@ -280,8 +178,19 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         var popupWidth: Int = 0
         var popupHeight: Int = 0
         
-        popupWidth = 400
-        popupHeight = 310
+        if ResolutePOS.DeviceType.IS_iPAD {
+            popupWidth = 400
+            popupHeight = 310
+        } else {
+            
+            if ResolutePOS.DeviceType.IS_IPHONE_5_SE {
+                popupWidth = 300
+                popupHeight = 300
+            } else {
+                popupWidth = 350
+                popupHeight = 300
+            }
+        }
         
         var x:Int = Int(UIScreen.main.bounds.width)
         var y:Int = Int(UIScreen.main.bounds.height)
@@ -289,31 +198,9 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         x =  (x - Int(popupWidth)) / 2
         y = (y - Int(popupHeight)) / 2
         
-        viewAddCustomer.frame = CGRect(x: CGFloat(x), y: CGFloat(y), width: self.view.frame.size.width, height: self.view.frame.size.height)
+        viewAddCustomer.frame = CGRect(x: CGFloat(x), y: CGFloat(y), width: CGFloat(popupWidth), height: CGFloat(popupHeight))
         viewAddCustomer.layoutIfNeeded()
         self.view.addSubview(viewAddCustomer)
-    }
-    
-    func addPropertyPopupFunctionForCustomerList()  {
-        
-        self.view.addSubview(viewCustomerList)
-        self.viewCustomerList.alpha = 0.0
-        
-        var popupWidth: Int = 0
-        var popupHeight: Int = 0
-        
-        popupWidth = 400
-        popupHeight = 310
-        
-        var x:Int = Int(UIScreen.main.bounds.width)
-        var y:Int = Int(UIScreen.main.bounds.height)
-        
-        x =  (x - Int(popupWidth)) / 2
-        y = (y - Int(popupHeight)) / 2
-        
-        viewCustomerList.frame = CGRect(x: CGFloat(x), y: CGFloat(y), width: self.view.frame.size.width, height: self.view.frame.size.height)
-        viewCustomerList.layoutIfNeeded()
-        self.view.addSubview(viewCustomerList)
     }
     
     func popUpShow(popupView :UIView) {
@@ -374,20 +261,24 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         }
     }
     
-    //MARK:- Helper For Getting All Customer List
-    func helperForGetCustList() {
-        let query = String(format: "select * from CustomerMaster")
-        self.aryFilterCustomerList = obj.getDynamicTableData(query: query)
-        self.aryObjCustomerList = obj.getDynamicTableData(query: query)
-        viewCustomerSuggestionList.isHidden = true
-    }
-    
     //MARK:- Helper for Insert Customer
     func insertCustomerHelper() {
         let query = "insert into CustomerMaster(Name,ContactNo,NoOfPax,IsAssign)values('\(txtCustName.text!)','\(txtCustNo.text!)','\(txtNoOfPax.text!)','\("")')"
         _ = obj.dboperation(query: query)
         self.popUpHide(popupView: viewAddCustomer)
+        self.setupCustData()
         self.helperForClearTextFieldData()
+    }
+    
+    //MARK:- Helper for Setup Customer Data
+    func setupCustData() {
+        
+        let query = String(format: "select * from CustomerMaster")
+        self.aryDispCustomerList = obj.getDynamicTableData(query: query)
+        
+        if self.aryDispCustomerList.count > 0 {
+            tblCustomerList.reloadData()
+        }
     }
     
     //MARK:- Helper For clear TextFields

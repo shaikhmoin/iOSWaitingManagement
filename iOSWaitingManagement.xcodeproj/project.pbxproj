@@ -10,13 +10,10 @@
 		32D057BB79D143865DCE83A3 /* Pods_iOSWaitingManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB01ED3C72223E2918E5D1F5 /* Pods_iOSWaitingManagement.framework */; };
 		384DEDB921D607430072D5D6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384DEDB821D607430072D5D6 /* HomeViewController.swift */; };
 		384DEDBC21D62B3C0072D5D6 /* DBClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384DEDBB21D62B3C0072D5D6 /* DBClass.swift */; };
-		385FE96B21D9EAD90048949A /* CustomerSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FE96921D9EAD90048949A /* CustomerSuggestionTableViewCell.swift */; };
-		385FE96C21D9EAD90048949A /* CustomerSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 385FE96A21D9EAD90048949A /* CustomerSuggestionTableViewCell.xib */; };
-		388F7BA721D7531800A7E1D9 /* CustomerListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388F7BA521D7531800A7E1D9 /* CustomerListTableViewCell.swift */; };
-		388F7BA821D7531800A7E1D9 /* CustomerListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 388F7BA621D7531800A7E1D9 /* CustomerListTableViewCell.xib */; };
+		385FE97121DA3B3C0048949A /* CustomerListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FE97021DA3B3C0048949A /* CustomerListTableViewCell.swift */; };
+		387F0D5321DCA77B0008A3D4 /* AssignTableCollectionViewCelliPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387F0D5121DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.swift */; };
+		387F0D5421DCA77B0008A3D4 /* AssignTableCollectionViewCelliPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387F0D5221DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.xib */; };
 		388F7BAA21D76D7E00A7E1D9 /* AssignTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388F7BA921D76D7E00A7E1D9 /* AssignTableViewController.swift */; };
-		388F7BAE21D7709400A7E1D9 /* AssignTableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388F7BAC21D7709400A7E1D9 /* AssignTableCollectionViewCell.swift */; };
-		388F7BAF21D7709400A7E1D9 /* AssignTableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 388F7BAD21D7709400A7E1D9 /* AssignTableCollectionViewCell.xib */; };
 		38BC9DCE21D4A8A300A368C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BC9DCD21D4A8A300A368C2 /* AppDelegate.swift */; };
 		38BC9DD321D4A8A400A368C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38BC9DD121D4A8A400A368C2 /* Main.storyboard */; };
 		38BC9DD521D4A8A400A368C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38BC9DD421D4A8A400A368C2 /* Assets.xcassets */; };
@@ -55,13 +52,10 @@
 /* Begin PBXFileReference section */
 		384DEDB821D607430072D5D6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		384DEDBB21D62B3C0072D5D6 /* DBClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBClass.swift; sourceTree = "<group>"; };
-		385FE96921D9EAD90048949A /* CustomerSuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerSuggestionTableViewCell.swift; sourceTree = "<group>"; };
-		385FE96A21D9EAD90048949A /* CustomerSuggestionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomerSuggestionTableViewCell.xib; sourceTree = "<group>"; };
-		388F7BA521D7531800A7E1D9 /* CustomerListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListTableViewCell.swift; sourceTree = "<group>"; };
-		388F7BA621D7531800A7E1D9 /* CustomerListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomerListTableViewCell.xib; sourceTree = "<group>"; };
+		385FE97021DA3B3C0048949A /* CustomerListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListTableViewCell.swift; sourceTree = "<group>"; };
+		387F0D5121DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignTableCollectionViewCelliPhone.swift; sourceTree = "<group>"; };
+		387F0D5221DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssignTableCollectionViewCelliPhone.xib; sourceTree = "<group>"; };
 		388F7BA921D76D7E00A7E1D9 /* AssignTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignTableViewController.swift; sourceTree = "<group>"; };
-		388F7BAC21D7709400A7E1D9 /* AssignTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignTableCollectionViewCell.swift; sourceTree = "<group>"; };
-		388F7BAD21D7709400A7E1D9 /* AssignTableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssignTableCollectionViewCell.xib; sourceTree = "<group>"; };
 		38BC9DCA21D4A8A300A368C2 /* iOSWaitingManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSWaitingManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38BC9DCD21D4A8A300A368C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38BC9DD221D4A8A400A368C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -122,20 +116,10 @@
 			path = SqliteClass;
 			sourceTree = "<group>";
 		};
-		385FE96821D9EABF0048949A /* CustomerSuggestionList */ = {
+		385FE96F21DA3B330048949A /* CustomerList */ = {
 			isa = PBXGroup;
 			children = (
-				385FE96921D9EAD90048949A /* CustomerSuggestionTableViewCell.swift */,
-				385FE96A21D9EAD90048949A /* CustomerSuggestionTableViewCell.xib */,
-			);
-			path = CustomerSuggestionList;
-			sourceTree = "<group>";
-		};
-		388F7BA421D7530100A7E1D9 /* CustomerList */ = {
-			isa = PBXGroup;
-			children = (
-				388F7BA521D7531800A7E1D9 /* CustomerListTableViewCell.swift */,
-				388F7BA621D7531800A7E1D9 /* CustomerListTableViewCell.xib */,
+				385FE97021DA3B3C0048949A /* CustomerListTableViewCell.swift */,
 			);
 			path = CustomerList;
 			sourceTree = "<group>";
@@ -143,8 +127,8 @@
 		388F7BAB21D7706700A7E1D9 /* AssignTableList */ = {
 			isa = PBXGroup;
 			children = (
-				388F7BAC21D7709400A7E1D9 /* AssignTableCollectionViewCell.swift */,
-				388F7BAD21D7709400A7E1D9 /* AssignTableCollectionViewCell.xib */,
+				387F0D5121DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.swift */,
+				387F0D5221DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.xib */,
 			);
 			path = AssignTableList;
 			sourceTree = "<group>";
@@ -368,8 +352,7 @@
 		38BC9DF221D4AD4200A368C2 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				385FE96821D9EABF0048949A /* CustomerSuggestionList */,
-				388F7BA421D7530100A7E1D9 /* CustomerList */,
+				385FE96F21DA3B330048949A /* CustomerList */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -461,12 +444,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				38BC9E2321D4AFF700A368C2 /* Lato-Light.ttf in Resources */,
-				388F7BA821D7531800A7E1D9 /* CustomerListTableViewCell.xib in Resources */,
 				38BC9DD821D4A8A400A368C2 /* LaunchScreen.storyboard in Resources */,
 				38BC9DD521D4A8A400A368C2 /* Assets.xcassets in Resources */,
-				388F7BAF21D7709400A7E1D9 /* AssignTableCollectionViewCell.xib in Resources */,
 				38BC9E3B21D4B2CC00A368C2 /* iPad.storyboard in Resources */,
-				385FE96C21D9EAD90048949A /* CustomerSuggestionTableViewCell.xib in Resources */,
 				38BC9E2021D4AFF700A368C2 /* Lato-Black.ttf in Resources */,
 				38BC9E3C21D4CDB900A368C2 /* Lato-Bold.ttf in Resources */,
 				38BC9E2B21D4AFF700A368C2 /* Lato-Thin.ttf in Resources */,
@@ -477,6 +457,7 @@
 				38BC9E2421D4AFF700A368C2 /* Lato-LightItalic.ttf in Resources */,
 				38BC9E2521D4AFF700A368C2 /* Lato-Medium.ttf in Resources */,
 				38BC9E2621D4AFF700A368C2 /* Lato-Regular.ttf in Resources */,
+				387F0D5421DCA77B0008A3D4 /* AssignTableCollectionViewCelliPhone.xib in Resources */,
 				38BC9DD321D4A8A400A368C2 /* Main.storyboard in Resources */,
 				38BC9E2721D4AFF700A368C2 /* Lato-Semibold.ttf in Resources */,
 			);
@@ -540,8 +521,6 @@
 				38BC9DFB21D4AE4D00A368C2 /* RSTextField.swift in Sources */,
 				38BC9E3121D4B0AC00A368C2 /* RSServiceConstants.swift in Sources */,
 				38BC9E0321D4AF5800A368C2 /* RSExtention.swift in Sources */,
-				385FE96B21D9EAD90048949A /* CustomerSuggestionTableViewCell.swift in Sources */,
-				388F7BAE21D7709400A7E1D9 /* AssignTableCollectionViewCell.swift in Sources */,
 				38BC9E3721D4B14400A368C2 /* RSRechability.swift in Sources */,
 				388F7BAA21D76D7E00A7E1D9 /* AssignTableViewController.swift in Sources */,
 				384DEDB921D607430072D5D6 /* HomeViewController.swift in Sources */,
@@ -551,12 +530,13 @@
 				38BC9E3521D4B0C500A368C2 /* Constants.swift in Sources */,
 				38BC9E0121D4AECC00A368C2 /* RSTableView.swift in Sources */,
 				38BC9DF921D4AE2800A368C2 /* RSTextView.swift in Sources */,
+				385FE97121DA3B3C0048949A /* CustomerListTableViewCell.swift in Sources */,
 				38BC9E2F21D4B09700A368C2 /* UserDefaultFunction.swift in Sources */,
 				38BC9DF521D4ADB800A368C2 /* RSLable.swift in Sources */,
 				38BC9DFD21D4AE7200A368C2 /* RSButton.swift in Sources */,
-				388F7BA721D7531800A7E1D9 /* CustomerListTableViewCell.swift in Sources */,
 				38BC9DCE21D4A8A300A368C2 /* AppDelegate.swift in Sources */,
 				38BC9DF721D4AE0E00A368C2 /* RSView.swift in Sources */,
+				387F0D5321DCA77B0008A3D4 /* AssignTableCollectionViewCelliPhone.swift in Sources */,
 				38BC9DFF21D4AE9600A368C2 /* RSImageView.swift in Sources */,
 				384DEDBC21D62B3C0072D5D6 /* DBClass.swift in Sources */,
 			);
@@ -698,12 +678,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BWZ4655PVJ;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = iOSWaitingManagement/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Resolute.iOSWaitingManagement;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -714,12 +695,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BWZ4655PVJ;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = iOSWaitingManagement/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Resolute.iOSWaitingManagement;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
