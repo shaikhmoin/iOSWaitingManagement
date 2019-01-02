@@ -31,8 +31,11 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
     //MARK:- UIView Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
+    
+    //    override var prefersStatusBarHidden: Bool {
+    //        return true
+    //    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

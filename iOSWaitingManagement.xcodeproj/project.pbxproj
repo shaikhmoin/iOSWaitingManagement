@@ -13,6 +13,8 @@
 		385FE97121DA3B3C0048949A /* CustomerListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FE97021DA3B3C0048949A /* CustomerListTableViewCell.swift */; };
 		387F0D5321DCA77B0008A3D4 /* AssignTableCollectionViewCelliPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387F0D5121DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.swift */; };
 		387F0D5421DCA77B0008A3D4 /* AssignTableCollectionViewCelliPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387F0D5221DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.xib */; };
+		387F0D5521DCE7950008A3D4 /* Pods-iOSWaitingManagement.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5216DCCEF8A9CDA7C9B4F6EC /* Pods-iOSWaitingManagement.debug.xcconfig */; };
+		387F0D5621DCE7950008A3D4 /* Pods-iOSWaitingManagement.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F9D2236A3D5EFB82893C899F /* Pods-iOSWaitingManagement.release.xcconfig */; };
 		388F7BAA21D76D7E00A7E1D9 /* AssignTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388F7BA921D76D7E00A7E1D9 /* AssignTableViewController.swift */; };
 		38BC9DCE21D4A8A300A368C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BC9DCD21D4A8A300A368C2 /* AppDelegate.swift */; };
 		38BC9DD321D4A8A400A368C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38BC9DD121D4A8A400A368C2 /* Main.storyboard */; };
@@ -451,6 +453,8 @@
 				38BC9E3C21D4CDB900A368C2 /* Lato-Bold.ttf in Resources */,
 				38BC9E2B21D4AFF700A368C2 /* Lato-Thin.ttf in Resources */,
 				38BC9E2821D4AFF700A368C2 /* Lato-Hairline.ttf in Resources */,
+				387F0D5621DCE7950008A3D4 /* Pods-iOSWaitingManagement.release.xcconfig in Resources */,
+				387F0D5521DCE7950008A3D4 /* Pods-iOSWaitingManagement.debug.xcconfig in Resources */,
 				38BC9E2A21D4AFF700A368C2 /* Lato-Heavy.ttf in Resources */,
 				38BC9E2221D4AFF700A368C2 /* Lato-Italic.ttf in Resources */,
 				38BC9E2921D4AFF700A368C2 /* Lato-HairlineItalic.ttf in Resources */,
