@@ -146,6 +146,8 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
                     RSAlertUtils.displayAlertWithMessage("Something was wrong....!")
                 }
             }
+        } else {
+            RSAlertUtils.displayNoInternetMessage()
         }
     }
     
@@ -185,6 +187,8 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
                     RSAlertUtils.displayAlertWithMessage("Something was wrong....!")
                 }
             }
+        } else {
+            RSAlertUtils.displayNoInternetMessage()
         }
     }
     

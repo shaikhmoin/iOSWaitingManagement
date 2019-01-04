@@ -4,7 +4,7 @@
 //
 //  Created by Akash on 12/27/18.
 //  Copyright © 2018 Moin. All rights reserved.
-//
+//Moin
 
 import UIKit
 import Alamofire
@@ -32,10 +32,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    //    override var prefersStatusBarHidden: Bool {
-    //        return true
-    //    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -222,6 +218,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
                     RSAlertUtils.displayAlertWithMessage("Something was wrong....!")
                 }
             }
+        } else {
+            RSAlertUtils.displayNoInternetMessage()
         }
     }
     
@@ -260,6 +258,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
                     RSAlertUtils.displayAlertWithMessage("Something was wrong....!")
                 }
             }
+        } else {
+             RSAlertUtils.displayNoInternetMessage()
         }
     }
     
