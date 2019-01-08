@@ -18,5 +18,8 @@ enum RSTextFieldType: Int{
     Email,
     FromDate,
     ToDate,
-    Floor
+    Floor,
+    Counter,
+    Location,
+    Tablet
 }

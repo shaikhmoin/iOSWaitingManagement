@@ -23,12 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var db: OpaquePointer?
     var strSelectedFloorID : Int!
     
+    var strSelectedLocationID : Int!
+    var strSelectedCounterID : Int!
+    var strSelectedTabletID : Int!
+    
+    var dictSelectedTab : [String:AnyObject] = [:]
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         IQKeyboardManager.shared.enable = true
         self.createDatabase()
         
-        // Open IPAD and IPHONE screen
+        // Open IPAD and IPHONE screen   
         let storyboard = ResolutePOS.getStoryBoard()
         let viewControllerVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         let navigationVC = UINavigationController(rootViewController: viewControllerVC)

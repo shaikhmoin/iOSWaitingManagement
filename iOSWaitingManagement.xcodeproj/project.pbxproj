@@ -11,6 +11,7 @@
 		384DEDB921D607430072D5D6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384DEDB821D607430072D5D6 /* HomeViewController.swift */; };
 		384DEDBC21D62B3C0072D5D6 /* DBClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384DEDBB21D62B3C0072D5D6 /* DBClass.swift */; };
 		385FE97121DA3B3C0048949A /* CustomerListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FE97021DA3B3C0048949A /* CustomerListTableViewCell.swift */; };
+		3876020921E31ADE00321D7A /* LocationAndCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3876020821E31ADE00321D7A /* LocationAndCounterViewController.swift */; };
 		387F0D5321DCA77B0008A3D4 /* AssignTableCollectionViewCelliPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387F0D5121DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.swift */; };
 		387F0D5421DCA77B0008A3D4 /* AssignTableCollectionViewCelliPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387F0D5221DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.xib */; };
 		387F0D5521DCE7950008A3D4 /* Pods-iOSWaitingManagement.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5216DCCEF8A9CDA7C9B4F6EC /* Pods-iOSWaitingManagement.debug.xcconfig */; };
@@ -55,6 +56,7 @@
 		384DEDB821D607430072D5D6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		384DEDBB21D62B3C0072D5D6 /* DBClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBClass.swift; sourceTree = "<group>"; };
 		385FE97021DA3B3C0048949A /* CustomerListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListTableViewCell.swift; sourceTree = "<group>"; };
+		3876020821E31ADE00321D7A /* LocationAndCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAndCounterViewController.swift; sourceTree = "<group>"; };
 		387F0D5121DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignTableCollectionViewCelliPhone.swift; sourceTree = "<group>"; };
 		387F0D5221DCA77A0008A3D4 /* AssignTableCollectionViewCelliPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssignTableCollectionViewCelliPhone.xib; sourceTree = "<group>"; };
 		388F7BA921D76D7E00A7E1D9 /* AssignTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignTableViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				38BC9E3D21D4D08000A368C2 /* LoginViewController.swift */,
 				384DEDB821D607430072D5D6 /* HomeViewController.swift */,
 				388F7BA921D76D7E00A7E1D9 /* AssignTableViewController.swift */,
+				3876020821E31ADE00321D7A /* LocationAndCounterViewController.swift */,
 			);
 			path = viewControllers;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				385FE97121DA3B3C0048949A /* CustomerListTableViewCell.swift in Sources */,
 				38BC9E2F21D4B09700A368C2 /* UserDefaultFunction.swift in Sources */,
 				38BC9DF521D4ADB800A368C2 /* RSLable.swift in Sources */,
+				3876020921E31ADE00321D7A /* LocationAndCounterViewController.swift in Sources */,
 				38BC9DFD21D4AE7200A368C2 /* RSButton.swift in Sources */,
 				38BC9DCE21D4A8A300A368C2 /* AppDelegate.swift in Sources */,
 				38BC9DF721D4AE0E00A368C2 /* RSView.swift in Sources */,

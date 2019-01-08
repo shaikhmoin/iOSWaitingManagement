@@ -27,13 +27,15 @@ struct CONSTANTS {
     static let CURRENCY = "CURRENCY"
     static let SERVER = "SERVER"
     static let IPADDRESS = "IPADDRESS"
+    static let SELECTEDTABDETAIL = "SELECTEDTABDETAIL"
+    static let TABLETDATA = "TABLETDATA"
     
     //MARK: Local APP ID & Secret
     static let appId  = "f73952739412294a1951df7dd11fa3d3"
     static let appSecret  = "d1ebadd478df8afed3595ac93812a1dc"
     static let applicationJson  = "application/json"
     static let ContentType = "Content-Type"
-    
+
     struct BASE_URL {
         
         //LOCAL
@@ -44,9 +46,9 @@ struct CONSTANTS {
     }
     
     struct APINAME {
-        static let checkIPAddress = "GetAllDataDataSet"
+        static let checkIPAddressOrGetLocation = "GetAllDataDataSet"
         static let GetLoginDet = "GetLoginDet"
-        static let GetFloorList = "GetAllJsonData"
+        static let GetFloorListOrDevice = "GetAllJsonData"
         static let GetTableList = "GetTables"
     }
     
@@ -205,11 +207,20 @@ class ResolutePOS: NSObject {
         return str
     }
     
-    class func getcurrentDate() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let strCurrentDate: String = formatter.string(from: Date())
-        return strCurrentDate
+    class func getTabDetail() -> String {
+        var str : String = ""
+        if let strTabDet = UserDefaults.standard.object(forKey: CONSTANTS.SELECTEDTABDETAIL){
+            str = strTabDet as! String
+        }
+        else {
+            // not exist
+        }
+        return str
+    }
+    
+    class func getDeviceID() -> String {
+        let strDeviceID : String = UserDefaults.standard.object(forKey: CONSTANTS.DEVICEID) as! String
+        return strDeviceID
     }
     
     class func getOrderMenu() -> [String] {
@@ -248,7 +259,7 @@ class ResolutePOS: NSObject {
     class func getStoryBoard() -> UIStoryboard {
         let storyBoard: UIStoryboard!
         
-        if DeviceType.IS_iPAD {
+        if IS_IPAD_DEVICE() {
             print(ScreenSize.SCREEN_MAX_LENGTH)
             storyBoard = UIStoryboard(name: "iPad", bundle: nil)
       
@@ -304,9 +315,24 @@ class ResolutePOS: NSObject {
                 return try JSONSerialization.jsonObject(with: data, options:.allowFragments) as? [String:AnyObject]
             } catch let error as NSError {
                 print(error)
+                RSAlertUtils.displayAlertWithMessage("Something wrong to Data Response")
             }
         }
         return nil
+    }
+    
+    
+    //MARK:- Helper for get Json String from Dict[{"DeviceID" : "6E43B9E1-4406-46A9-A705-77F975E951FB","TabID" : 10}]
+    static func getJsonStringByDictionary(dict:[String:AnyObject]) -> String {
+        let jsonData: Data? = try? JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions(rawValue: 1))
+        return String(data: jsonData!, encoding: .utf8)!
+    }
+    
+    class func getcurrentDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let strCurrentDate: String = formatter.string(from: Date())
+        return strCurrentDate
     }
     
     //DATE FROM STRING

@@ -176,18 +176,11 @@ class ServiceManager: NSObject {
                 self.stopLoader()
                 
                 print(response.result.value!)
-           
-                
+
                 if response.result.value != nil{
                     
 //                    var result = response.result.value! as! String
 //                    print("RESULT",result)
-//
-//                    let d  = try Data(response.result.value.utf8)
-//                    let xml = XMLParser(data: d)
-//                    print(xml)
-//                    xml.delegate = self
-//                    xml.parse()
                     
                     var result : [String:AnyObject] = [String:AnyObject]()
                     var result2 = response.result.value
@@ -382,7 +375,7 @@ class ServiceManager: NSObject {
             }
         }
     }
-    
+   
     func startLoader() {
         let activityData = ActivityData()
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)

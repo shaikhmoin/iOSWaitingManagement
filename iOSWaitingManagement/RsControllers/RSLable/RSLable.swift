@@ -26,7 +26,7 @@ class RSCustomerTitleLable: UILabel {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         
-        if ResolutePOS.DeviceType.IS_iPAD {
+        if IS_IPAD_DEVICE() {
             self.font = UIFont.appFont_LatoRegular_WithSize(14)
         } else {
             self.font = UIFont.appFont_LatoRegular_WithSize(12)

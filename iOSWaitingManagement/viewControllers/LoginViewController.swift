@@ -22,15 +22,15 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
     var strPin : String = ""
     var dimView:UIView?
     
-    var arr = [Any]()
-    var brr = [String]()
     var strResult = ""
     var finalVal : String = ""
     var strChkXML : String = ""
+    var strdeviceID : String = ""
     
     //MARK:- UIView Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,6 +48,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
             txtIP.becomeFirstResponder()
         }
     }
+    
     //MARK:- UITextfield Delegate Methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -136,7 +137,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
         var popupWidth: Int = 0
         var popupHeight: Int = 0
         
-        if ResolutePOS.DeviceType.IS_iPAD {
+        if IS_IPAD_DEVICE() {
             popupWidth = 520
             popupHeight = 210
         } else {
@@ -191,7 +192,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
             
             UserDefaults.standard.set( "http://" + self.txtIP.text! + "/", forKey: CONSTANTS.IPADDRESS)
             
-            let strUrl : String = CONSTANTS.APINAME.checkIPAddress
+            let strUrl : String = CONSTANTS.APINAME.checkIPAddressOrGetLocation
             print("URL",strUrl)
             
             let headers: HTTPHeaders = [:]
@@ -259,15 +260,70 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
                 }
             }
         } else {
-             RSAlertUtils.displayNoInternetMessage()
+            RSAlertUtils.displayNoInternetMessage()
+        }
+    }
+    
+    //MARK:- Service call for Device Approved Or Not
+    func ServiceCallForCheckDeviceIsApprovedOrNot() {
+        if IS_INTERNET_AVAILABLE() {
+            
+            self.strChkXML = "DeviceApproved"
+            finalVal = ""
+            
+            //Get userdefault Dictionary
+            let dictSelectedTabdetail:[String:AnyObject] = UserDefaultFunction.getDictionary(forKey:CONSTANTS.SELECTEDTABDETAIL)! as [String : AnyObject]
+            print(dictSelectedTabdetail)
+            let strTabID = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dictSelectedTabdetail, key: "TabID")
+            
+            strdeviceID = ResolutePOS.getDeviceID()
+            if strdeviceID == "" || strdeviceID == nil {
+                strdeviceID = (UIDevice.current.identifierForVendor?.uuidString)!
+            }
+            
+            var dicJ : [String:AnyObject] = [:]
+            dicJ["TabID"] = Int(strTabID) as AnyObject
+            dicJ["DeviceID"] = strdeviceID as AnyObject
+            print(dicJ) 
+            
+            //Get JsonString From Dict
+            let strResult = ResolutePOS.getJsonStringByDictionary(dict: dicJ)
+            print(strResult)
+            
+            let strUrl : String = CONSTANTS.APINAME.GetFloorListOrDevice
+            print("URL",strUrl)
+            
+            let headers: HTTPHeaders = [:]
+            
+            var parameter : [String:AnyObject] = [:]
+            parameter["Procedure"] = "TabOrder_Check_TabApproval" as AnyObject
+            parameter["Json"] = "[\(strResult)]" as AnyObject
+            print("PARAM",parameter)
+            
+            ServiceManager.sharedManager.postResponseWithHeader(strUrl, params: parameter, headers: headers, Loader: false) { (result) in
+                print(result)
+                
+                do
+                {
+                    let data  = try Data(result.utf8)
+                    let xml = XMLParser(data: data)
+                    print(xml.description)
+                    print(xml)
+                    
+                    xml.delegate = self
+                    xml.parse()
+                }
+                catch
+                {
+                    RSAlertUtils.displayAlertWithMessage("Something was wrong....!")
+                }
+            }
+        } else {
+            RSAlertUtils.displayNoInternetMessage()
         }
     }
     
     //MARK:- XML Methods
-    func parserDidStartDocument(_ parser: XMLParser) {
-        arr = [Any]()
-    }
-    
     func parserDidEndDocument(_ parser: XMLParser) {
         print(finalVal)
         
@@ -296,7 +352,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
         if strChkXML == "LoginAPI" {
             if finalVal != "" {
                 let responseData = ResolutePOS.convertStringToDictionary(text: finalVal)!
-                
+                print(responseData)
                 //Check Array Nil Or Not
                 if (ResolutePOS.checkArray(dict: responseData, key: "Particular")) {
                     
@@ -304,16 +360,25 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
                     
                     if aryList.count > 0 {
                         let dict : [String:AnyObject]  = aryList[0] as! [String:AnyObject]
+                        print(dict)
                         
-                        let userID = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dict, key: "UserID")
-                        let server = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dict, key: "Server")
+                        let strUserID = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dict, key: "UserID")
+                        let strServer = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dict, key: "Server")
                         
-                        if userID == "0" {
+                        if strUserID == "0" {
                             RSAlertUtils.displayAlertWithMessage("Please Enter Valid Pin!")
                         } else {
-                            UserDefaults.standard.set(server, forKey: CONSTANTS.SERVER)
-                            let nav = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                            self.navigationController?.pushViewController(nav, animated: true)
+                            
+                            UserDefaults.standard.set(strUserID, forKey: CONSTANTS.USERID)
+                            UserDefaults.standard.set(strServer, forKey: CONSTANTS.SERVER)
+                            
+                            //Check Userdefault TabDetail is Empty Or Not
+                            if (UserDefaults.standard.object(forKey: CONSTANTS.SELECTEDTABDETAIL) == nil) {
+                                let nav = self.storyboard?.instantiateViewController(withIdentifier: "LocationAndCounterViewController") as! LocationAndCounterViewController
+                                self.navigationController?.pushViewController(nav, animated: true)
+                            } else {
+                                self.ServiceCallForCheckDeviceIsApprovedOrNot()
+                            }
                         }
                     }
                 }
@@ -321,12 +386,51 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
                 popUpShow(popupView: viewIPAddress)
             }
         }
-    }
-    
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        if elementName == "string"
-        {
-            brr = [String]()
+        
+        if strChkXML == "DeviceApproved" {
+            if finalVal != "" {
+                let responseData = ResolutePOS.convertStringToDictionary(text: finalVal)!
+                
+                //Check Array Nil Or Not
+                if (ResolutePOS.checkArray(dict: responseData, key: "Table")) {
+                    
+                    let aryResponse = responseData["Table"] as! [AnyObject]
+                    
+                    if aryResponse.count > 0 {
+                        
+                        let dict : [String:AnyObject]  = aryResponse[0] as! [String:AnyObject]
+                        print(dict)
+                        
+                        let strReult = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dict, key: "Result")
+                        
+                        if strReult == "0" {
+                            // Device is Not Approved
+                            RSAlertUtils.displayAlertWithMessage("Sorry, Your Device is Not Approved. Please Contact Your Adminstrator.")
+                            
+                        } else if strReult == "-1" {
+                            // Device is Not Register & Not Approved
+                            let nav = self.storyboard?.instantiateViewController(withIdentifier: "LocationAndCounterViewController") as! LocationAndCounterViewController
+                            self.navigationController?.pushViewController(nav, animated: true)
+                            
+                        } else if strReult == "1" {
+                            // Device is Approved
+                            let aryTabData = responseData["Table1"] as! [AnyObject]
+                            
+                            if aryTabData.count > 0 {
+                                
+                                let dictTabData : [String:AnyObject]  = aryTabData[0] as! [String:AnyObject]
+                                print(dictTabData)
+                                
+                                UserDefaultFunction.setCustomDictionary(dict: dictTabData, key: CONSTANTS.TABLETDATA)
+                                UserDefaults.standard.set(strdeviceID, forKey: CONSTANTS.DEVICEID)
+                                
+                                let nav = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                                self.navigationController?.pushViewController(nav, animated: true)
+                            }
+                        }
+                    }
+                }
+            } 
         }
     }
     

@@ -21,9 +21,7 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
     var strChkXML : String = ""
     var strResult = ""
     var finalVal : String = ""
-    var arr = [Any]()
-    var brr = [String]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,7 +84,7 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = collectionView.frame.size.width
-        if ResolutePOS.DeviceType.IS_iPAD  {
+        if IS_IPAD_DEVICE()  {
             return CGSize(width: (width/4) - 20, height:180)
         } else {
             return CGSize(width: (width/2) - 10, height:180)
@@ -118,7 +116,7 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
             arrVal.append(name as AnyObject)
             print(arrVal)
             
-            let strUrl : String = CONSTANTS.APINAME.GetFloorList
+            let strUrl : String = CONSTANTS.APINAME.GetFloorListOrDevice
             print("URL",strUrl)
             
             let headers: HTTPHeaders = [:]
@@ -194,6 +192,7 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
     
     //MARK:- XML Methods
     func parserDidEndDocument(_ parser: XMLParser) {
+        print("Hello first")
         print(finalVal)
         
         if strChkXML == "FloorListAPI" {
@@ -212,6 +211,8 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
         }
         
         if strChkXML == "TableListAPI" {
+            print("Hello final")
+            print(finalVal)
             if finalVal != "" {
                 let responseData = ResolutePOS.convertStringToDictionary(text: finalVal)!
                 
@@ -231,6 +232,8 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
     }
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
+        print("First Check")
+        print(string)
         strResult = string //{"Table":[{"FloorID":1,"FloorName":"Ground Floor","Height":"484","Width":"800"}]}
         print(strResult)
     }

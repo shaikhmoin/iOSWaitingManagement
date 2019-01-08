@@ -832,6 +832,205 @@
             </objects>
             <point key="canvasLocation" x="2096.25" y="116.19718309859155"/>
         </scene>
+        <!--Location And Counter View Controller-->
+        <scene sceneID="qHj-Ne-Xj6">
+            <objects>
+                <viewController storyboardIdentifier="LocationAndCounterViewController" id="FZf-kC-p0D" customClass="LocationAndCounterViewController" customModule="iOSWaitingManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="T3a-B0-EtF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xbB-xA-wg7">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                                <color key="backgroundColor" red="0.0" green="0.4157714844" blue="0.7194824219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="6vb-40-eNS"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAr-N6-Eeq">
+                                <rect key="frame" x="0.0" y="20" width="320" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvW-80-sib" customClass="RSTitleLable" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.41568627450000001" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHo-Ub-an3">
+                                        <rect key="frame" x="10" y="3" width="45" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="Tgs-aY-I5m"/>
+                                            <constraint firstAttribute="height" constant="45" id="lA7-Ub-cTv"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="left_arrow"/>
+                                        <connections>
+                                            <action selector="btnCloseClick:" destination="FZf-kC-p0D" eventType="touchUpInside" id="rO3-eE-8Dm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.29411764709999999" green="0.72549019609999998" blue="0.85490196080000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="cvW-80-sib" firstAttribute="top" secondItem="VAr-N6-Eeq" secondAttribute="top" id="4h8-xb-5nL"/>
+                                    <constraint firstItem="lHo-Ub-an3" firstAttribute="leading" secondItem="VAr-N6-Eeq" secondAttribute="leading" constant="10" id="Hco-v9-FWk"/>
+                                    <constraint firstAttribute="trailing" secondItem="cvW-80-sib" secondAttribute="trailing" id="TLT-CR-Pq3"/>
+                                    <constraint firstItem="cvW-80-sib" firstAttribute="leading" secondItem="VAr-N6-Eeq" secondAttribute="leading" id="eeF-9t-KgK"/>
+                                    <constraint firstAttribute="bottom" secondItem="cvW-80-sib" secondAttribute="bottom" id="gMd-0N-TYL"/>
+                                    <constraint firstAttribute="height" constant="50" id="rLA-35-xx8"/>
+                                    <constraint firstItem="lHo-Ub-an3" firstAttribute="top" secondItem="VAr-N6-Eeq" secondAttribute="top" constant="3" id="zZf-Bp-ZrS"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZq-Xh-vB8">
+                                <rect key="frame" x="9" y="80" width="301" height="408"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Location :" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7N-DF-gtw" customClass="RSCustomerTitleLable" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="20" width="150.5" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="e6x-pX-nTf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Select Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m17-QH-iJE" customClass="RSTextField" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="63" width="261" height="40"/>
+                                        <color key="backgroundColor" red="0.43921568630000002" green="0.82352941180000006" blue="0.95686274510000002" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Fcq-TT-TIu"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Swc-kT-hzu">
+                                        <rect key="frame" x="253" y="73" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="25N-Zk-0fc"/>
+                                            <constraint firstAttribute="width" constant="20" id="XU8-2h-bhj"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Counter :" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCz-Do-c86" customClass="RSCustomerTitleLable" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="115" width="144.5" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="Ste-Mg-y2p"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Select Counter" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sEg-W6-QnD" customClass="RSTextField" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="158" width="261" height="40"/>
+                                        <color key="backgroundColor" red="0.43921568630000002" green="0.82352941180000006" blue="0.95686274510000002" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="D3L-fN-sQm"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="8s3-Gs-yzn">
+                                        <rect key="frame" x="253" y="168" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="Re1-zU-r92"/>
+                                            <constraint firstAttribute="width" constant="20" id="aS0-vh-oAu"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Tablet :" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOo-IA-cQa" customClass="RSCustomerTitleLable" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="210" width="126" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="Z8n-Tz-nQh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Select Tablet" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="84b-dc-0fb" customClass="RSTextField" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="253" width="266" height="40"/>
+                                        <color key="backgroundColor" red="0.43921568630000002" green="0.82352941180000006" blue="0.95686274510000002" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Qcc-9x-DKf"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="5n3-Jp-1JR">
+                                        <rect key="frame" x="258" y="263" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="ry7-v4-8p1"/>
+                                            <constraint firstAttribute="height" constant="20" id="vor-Zi-BQu"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVw-dk-3QW">
+                                        <rect key="frame" x="75.5" y="318" width="150" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.41568627450000001" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="kG0-T7-M8N"/>
+                                            <constraint firstAttribute="height" constant="40" id="tRR-BV-mrJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="20"/>
+                                        <state key="normal" title="SET">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnSetClick:" destination="FZf-kC-p0D" eventType="touchUpInside" id="uhb-DY-Lnh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="rVw-dk-3QW" firstAttribute="top" secondItem="84b-dc-0fb" secondAttribute="bottom" constant="25" id="0Sr-z9-Aq2"/>
+                                    <constraint firstAttribute="trailing" secondItem="84b-dc-0fb" secondAttribute="trailing" constant="15" id="54U-n6-98o"/>
+                                    <constraint firstItem="5n3-Jp-1JR" firstAttribute="top" secondItem="84b-dc-0fb" secondAttribute="top" constant="10" id="7eb-wz-QKg"/>
+                                    <constraint firstItem="84b-dc-0fb" firstAttribute="leading" secondItem="WZq-Xh-vB8" secondAttribute="leading" constant="20" id="9bT-uV-7Jv"/>
+                                    <constraint firstItem="sEg-W6-QnD" firstAttribute="leading" secondItem="WZq-Xh-vB8" secondAttribute="leading" constant="20" id="9fH-KJ-imt"/>
+                                    <constraint firstItem="m17-QH-iJE" firstAttribute="top" secondItem="B7N-DF-gtw" secondAttribute="bottom" constant="8" id="Ewq-Ld-tL3"/>
+                                    <constraint firstItem="sEg-W6-QnD" firstAttribute="top" secondItem="DCz-Do-c86" secondAttribute="bottom" constant="8" id="HHb-j7-di3"/>
+                                    <constraint firstItem="8s3-Gs-yzn" firstAttribute="top" secondItem="sEg-W6-QnD" secondAttribute="top" constant="10" id="MPd-q7-KZ0"/>
+                                    <constraint firstItem="rVw-dk-3QW" firstAttribute="centerX" secondItem="WZq-Xh-vB8" secondAttribute="centerX" id="QPu-tL-7A1"/>
+                                    <constraint firstItem="m17-QH-iJE" firstAttribute="leading" secondItem="WZq-Xh-vB8" secondAttribute="leading" constant="20" id="Sdb-5x-tK8"/>
+                                    <constraint firstItem="84b-dc-0fb" firstAttribute="top" secondItem="bOo-IA-cQa" secondAttribute="bottom" constant="8" id="WSH-Le-Tim"/>
+                                    <constraint firstItem="Swc-kT-hzu" firstAttribute="trailing" secondItem="m17-QH-iJE" secondAttribute="trailing" constant="-8" id="WdW-Jj-hUc"/>
+                                    <constraint firstAttribute="trailing" secondItem="m17-QH-iJE" secondAttribute="trailing" constant="20" id="bvf-zC-tVJ"/>
+                                    <constraint firstItem="bOo-IA-cQa" firstAttribute="leading" secondItem="WZq-Xh-vB8" secondAttribute="leading" constant="20" id="cWU-t6-LAs"/>
+                                    <constraint firstItem="B7N-DF-gtw" firstAttribute="top" secondItem="WZq-Xh-vB8" secondAttribute="top" constant="20" id="g15-wf-14Z"/>
+                                    <constraint firstAttribute="trailing" secondItem="sEg-W6-QnD" secondAttribute="trailing" constant="20" id="kvF-wx-jxv"/>
+                                    <constraint firstItem="8s3-Gs-yzn" firstAttribute="trailing" secondItem="sEg-W6-QnD" secondAttribute="trailing" constant="-8" id="mbp-uz-yiu"/>
+                                    <constraint firstItem="B7N-DF-gtw" firstAttribute="leading" secondItem="WZq-Xh-vB8" secondAttribute="leading" constant="20" id="qqc-TC-Vlf"/>
+                                    <constraint firstItem="Swc-kT-hzu" firstAttribute="top" secondItem="m17-QH-iJE" secondAttribute="top" constant="10" id="qud-Vg-wCo"/>
+                                    <constraint firstItem="bOo-IA-cQa" firstAttribute="top" secondItem="sEg-W6-QnD" secondAttribute="bottom" constant="12" id="tGh-6E-fFG"/>
+                                    <constraint firstItem="5n3-Jp-1JR" firstAttribute="trailing" secondItem="84b-dc-0fb" secondAttribute="trailing" constant="-8" id="y5l-dT-jvb"/>
+                                    <constraint firstItem="DCz-Do-c86" firstAttribute="leading" secondItem="WZq-Xh-vB8" secondAttribute="leading" constant="20" id="ySE-qo-0mw"/>
+                                    <constraint firstItem="DCz-Do-c86" firstAttribute="top" secondItem="m17-QH-iJE" secondAttribute="bottom" constant="12" id="ygi-yJ-vxi"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xbB-xA-wg7" firstAttribute="top" secondItem="T3a-B0-EtF" secondAttribute="top" id="8hy-bF-Y3V"/>
+                            <constraint firstItem="WZq-Xh-vB8" firstAttribute="top" secondItem="VAr-N6-Eeq" secondAttribute="bottom" constant="10" id="AqA-IA-z9K"/>
+                            <constraint firstItem="VAr-N6-Eeq" firstAttribute="leading" secondItem="OC3-5r-gJD" secondAttribute="leading" id="Ejp-NG-Fma"/>
+                            <constraint firstItem="WZq-Xh-vB8" firstAttribute="centerX" secondItem="T3a-B0-EtF" secondAttribute="centerX" id="Heq-FO-IK1"/>
+                            <constraint firstItem="WZq-Xh-vB8" firstAttribute="centerY" secondItem="T3a-B0-EtF" secondAttribute="centerY" id="JW1-8i-8vr"/>
+                            <constraint firstItem="VAr-N6-Eeq" firstAttribute="trailing" secondItem="OC3-5r-gJD" secondAttribute="trailing" id="bCA-oM-5QL"/>
+                            <constraint firstItem="xbB-xA-wg7" firstAttribute="leading" secondItem="T3a-B0-EtF" secondAttribute="leading" id="cyk-oW-xe8"/>
+                            <constraint firstAttribute="trailing" secondItem="xbB-xA-wg7" secondAttribute="trailing" id="fPN-6Y-qiL"/>
+                            <constraint firstItem="VAr-N6-Eeq" firstAttribute="top" secondItem="xbB-xA-wg7" secondAttribute="bottom" id="qIl-fO-kHV"/>
+                            <constraint firstItem="OC3-5r-gJD" firstAttribute="trailing" secondItem="WZq-Xh-vB8" secondAttribute="trailing" constant="10" id="vxo-Lt-l8I"/>
+                            <constraint firstItem="WZq-Xh-vB8" firstAttribute="leading" secondItem="OC3-5r-gJD" secondAttribute="leading" constant="9" id="xbM-uR-rsP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OC3-5r-gJD"/>
+                    </view>
+                    <connections>
+                        <outlet property="txtCounterList" destination="sEg-W6-QnD" id="iSk-oI-gpv"/>
+                        <outlet property="txtLocationList" destination="m17-QH-iJE" id="Jp1-em-m0p"/>
+                        <outlet property="txtTabletList" destination="84b-dc-0fb" id="lf6-8n-YDb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oep-DA-tsw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2887.5" y="120.4225352112676"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mxy-xu-2v4">
             <objects>

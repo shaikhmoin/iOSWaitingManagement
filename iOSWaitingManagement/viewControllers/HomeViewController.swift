@@ -178,7 +178,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         var popupWidth: Int = 0
         var popupHeight: Int = 0
         
-        if ResolutePOS.DeviceType.IS_iPAD {
+        if IS_IPAD_DEVICE() {
             popupWidth = 400
             popupHeight = 310
         } else {

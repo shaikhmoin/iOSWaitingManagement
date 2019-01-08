@@ -11,15 +11,30 @@ import UIKit
 
 class UserDefaultFunction: NSObject {
     
-    class public func setCustomDictionary(dict: [String : String], key:String) {
+    //Set User default Dictionary
+    class public func setCustomDictionary(dict: [String : AnyObject], key:String) {
         print(dict)
         let dictData = NSKeyedArchiver.archivedData(withRootObject: dict)
         UserDefaults.standard.set(dictData, forKey: key)
     }
     
-    class public func getDictionary(forKey: String) -> [String : String]? {
+    //BazarBit
+//    class public func setCustomDictionary(dict: [String: Any], key:String) {
+//        let dictData = NSKeyedArchiver.archivedData(withRootObject: dict)
+//        UserDefaults.standard.set(dictData, forKey: key)
+//    }
+    
+    //Get User default Dictionary
+    class public func getDictionary(forKey: String) -> [String : AnyObject]? {
         let dictData = UserDefaults.standard.object(forKey: forKey)
         let object = NSKeyedUnarchiver.unarchiveObject(with: (dictData as! NSData) as Data)
-        return object as? [String : String]
+        return object as? [String : AnyObject]
     }
+    
+    //BazarBit
+//    class public func getDictionary(forKey: String) -> [String: Any]? {
+//        let dictData = UserDefaults.standard.object(forKey: forKey)
+//        let object = NSKeyedUnarchiver.unarchiveObject(with: (dictData as! NSData) as Data)
+//        return object as? [String: Any]
+//    }
 }

@@ -872,6 +872,208 @@
             </objects>
             <point key="canvasLocation" x="1610.9375" y="312.890625"/>
         </scene>
+        <!--Location And Counter View Controller-->
+        <scene sceneID="kkr-Ej-HGl">
+            <objects>
+                <viewController storyboardIdentifier="LocationAndCounterViewController" id="BcM-tm-c8o" customClass="LocationAndCounterViewController" customModule="iOSWaitingManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8Ya-XJ-Bxv">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gse-bB-ZVg">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="20"/>
+                                <color key="backgroundColor" red="0.0" green="0.4157714844" blue="0.7194824219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="rba-7N-bYT"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5d-Ro-MV8">
+                                <rect key="frame" x="0.0" y="20" width="768" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYG-Ff-eZ4" customClass="RSTitleLable" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.41568627450000001" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="2To-fj-EIA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xL-Mn-ti3">
+                                        <rect key="frame" x="15" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="est-aU-WTW"/>
+                                            <constraint firstAttribute="width" constant="50" id="naI-eO-4No"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="left_arrow"/>
+                                        <connections>
+                                            <action selector="btnCloseClick:" destination="BcM-tm-c8o" eventType="touchUpInside" id="txS-TM-xHz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.29411764709999999" green="0.72549019609999998" blue="0.85490196080000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="75u-rX-He0"/>
+                                    <constraint firstAttribute="trailing" secondItem="dYG-Ff-eZ4" secondAttribute="trailing" id="JIm-Qc-IzO"/>
+                                    <constraint firstItem="dYG-Ff-eZ4" firstAttribute="top" secondItem="d5d-Ro-MV8" secondAttribute="top" id="Qfb-jY-MTm"/>
+                                    <constraint firstItem="3xL-Mn-ti3" firstAttribute="top" secondItem="d5d-Ro-MV8" secondAttribute="top" id="Ycw-6m-2ud"/>
+                                    <constraint firstItem="3xL-Mn-ti3" firstAttribute="leading" secondItem="d5d-Ro-MV8" secondAttribute="leading" constant="15" id="hPy-xr-sR5"/>
+                                    <constraint firstItem="dYG-Ff-eZ4" firstAttribute="leading" secondItem="d5d-Ro-MV8" secondAttribute="leading" id="nOE-e5-9hD"/>
+                                    <constraint firstAttribute="bottom" secondItem="dYG-Ff-eZ4" secondAttribute="bottom" id="pS8-My-42T"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QYN-o7-Lmo">
+                                <rect key="frame" x="10" y="100" width="748" height="430"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Location :" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAT-J6-whl" customClass="RSCustomerTitleLable" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="20" width="150.5" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="mfh-Go-C49"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Select Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YS0-GU-hiM" customClass="RSTextField" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="65" width="708" height="40"/>
+                                        <color key="backgroundColor" red="0.43921568630000002" green="0.82352941180000006" blue="0.95686274510000002" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="me6-TV-bNW"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="rEu-45-ANL">
+                                        <rect key="frame" x="700" y="75" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="g7b-Qy-4GR"/>
+                                            <constraint firstAttribute="height" constant="20" id="kMw-MO-lpn"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Counter :" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0J6-oS-I7u" customClass="RSCustomerTitleLable" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="115" width="144.5" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="drK-Q3-5h9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Select Counter" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ag5-IZ-Jzs" customClass="RSTextField" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="160" width="708" height="40"/>
+                                        <color key="backgroundColor" red="0.43921568630000002" green="0.82352941180000006" blue="0.95686274510000002" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="dWR-k1-PSq"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="uDE-9O-2WU">
+                                        <rect key="frame" x="700" y="170" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="02t-Cf-XgP"/>
+                                            <constraint firstAttribute="height" constant="20" id="Djj-he-7Wb"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Tablet :" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAL-Ln-3iB" customClass="RSCustomerTitleLable" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="210" width="126" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="hy6-om-UYD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Select Tablet" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="84b-vx-Xc8" customClass="RSTextField" customModule="iOSWaitingManagement" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="255" width="708" height="40"/>
+                                        <color key="backgroundColor" red="0.43921568630000002" green="0.82352941180000006" blue="0.95686274510000002" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="AK2-2p-jAS"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zax-zy-5pq">
+                                        <rect key="frame" x="700" y="265" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="BHn-A4-y8u"/>
+                                            <constraint firstAttribute="width" constant="20" id="VMX-Q3-CtK"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Odf-F4-9bc">
+                                        <rect key="frame" x="274.5" y="335" width="200" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.41568627450000001" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="ZEi-Ol-9LW"/>
+                                            <constraint firstAttribute="width" constant="200" id="oZ4-rn-XEg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="20"/>
+                                        <state key="normal" title="SET">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnSetClick:" destination="BcM-tm-c8o" eventType="touchUpInside" id="Ewo-cd-0gU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="0J6-oS-I7u" firstAttribute="leading" secondItem="QYN-o7-Lmo" secondAttribute="leading" constant="20" id="3ed-PE-gjp"/>
+                                    <constraint firstItem="0J6-oS-I7u" firstAttribute="top" secondItem="YS0-GU-hiM" secondAttribute="bottom" constant="10" id="3rV-Kh-rE1"/>
+                                    <constraint firstItem="Odf-F4-9bc" firstAttribute="top" secondItem="84b-vx-Xc8" secondAttribute="bottom" constant="40" id="4Kt-kB-pJk"/>
+                                    <constraint firstItem="YS0-GU-hiM" firstAttribute="top" secondItem="fAT-J6-whl" secondAttribute="bottom" constant="5" id="7tx-ZT-OZy"/>
+                                    <constraint firstItem="fAT-J6-whl" firstAttribute="top" secondItem="QYN-o7-Lmo" secondAttribute="top" constant="20" id="7xK-Fv-qag"/>
+                                    <constraint firstItem="uDE-9O-2WU" firstAttribute="trailing" secondItem="Ag5-IZ-Jzs" secondAttribute="trailing" constant="-8" id="8HM-KB-pfd"/>
+                                    <constraint firstItem="Odf-F4-9bc" firstAttribute="centerX" secondItem="QYN-o7-Lmo" secondAttribute="centerX" id="8Jr-mP-67t"/>
+                                    <constraint firstItem="84b-vx-Xc8" firstAttribute="leading" secondItem="QYN-o7-Lmo" secondAttribute="leading" constant="20" id="Cpb-i3-8rV"/>
+                                    <constraint firstItem="rEu-45-ANL" firstAttribute="top" secondItem="YS0-GU-hiM" secondAttribute="top" constant="10" id="M4u-VI-ZbC"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ag5-IZ-Jzs" secondAttribute="trailing" constant="20" id="Oz9-9p-QAq"/>
+                                    <constraint firstItem="zax-zy-5pq" firstAttribute="trailing" secondItem="84b-vx-Xc8" secondAttribute="trailing" constant="-8" id="QUx-T0-baW"/>
+                                    <constraint firstItem="fAT-J6-whl" firstAttribute="leading" secondItem="QYN-o7-Lmo" secondAttribute="leading" constant="20" id="R9S-Ea-5YD"/>
+                                    <constraint firstItem="zax-zy-5pq" firstAttribute="top" secondItem="84b-vx-Xc8" secondAttribute="top" constant="10" id="RZU-US-N8X"/>
+                                    <constraint firstItem="VAL-Ln-3iB" firstAttribute="top" secondItem="Ag5-IZ-Jzs" secondAttribute="bottom" constant="10" id="SXv-ei-zr1"/>
+                                    <constraint firstItem="uDE-9O-2WU" firstAttribute="top" secondItem="Ag5-IZ-Jzs" secondAttribute="top" constant="10" id="bvw-ao-Dph"/>
+                                    <constraint firstItem="VAL-Ln-3iB" firstAttribute="leading" secondItem="QYN-o7-Lmo" secondAttribute="leading" constant="20" id="dwK-ae-Yk9"/>
+                                    <constraint firstItem="YS0-GU-hiM" firstAttribute="leading" secondItem="QYN-o7-Lmo" secondAttribute="leading" constant="20" id="ejQ-Up-X9Q"/>
+                                    <constraint firstItem="84b-vx-Xc8" firstAttribute="top" secondItem="VAL-Ln-3iB" secondAttribute="bottom" constant="5" id="euO-Xu-Idc"/>
+                                    <constraint firstItem="Ag5-IZ-Jzs" firstAttribute="leading" secondItem="QYN-o7-Lmo" secondAttribute="leading" constant="20" id="gGt-dc-Yel"/>
+                                    <constraint firstItem="Ag5-IZ-Jzs" firstAttribute="top" secondItem="0J6-oS-I7u" secondAttribute="bottom" constant="5" id="kY2-Rb-NdW"/>
+                                    <constraint firstItem="rEu-45-ANL" firstAttribute="trailing" secondItem="YS0-GU-hiM" secondAttribute="trailing" constant="-8" id="lsu-7C-C37"/>
+                                    <constraint firstAttribute="trailing" secondItem="84b-vx-Xc8" secondAttribute="trailing" constant="20" id="qoE-B8-UaZ"/>
+                                    <constraint firstAttribute="height" constant="430" id="wdE-mn-gdu"/>
+                                    <constraint firstAttribute="trailing" secondItem="YS0-GU-hiM" secondAttribute="trailing" constant="20" id="xzC-y6-iW5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="d5d-Ro-MV8" firstAttribute="top" secondItem="Gse-bB-ZVg" secondAttribute="bottom" id="4vh-qp-N5A"/>
+                            <constraint firstItem="hzg-IB-Q31" firstAttribute="trailing" secondItem="QYN-o7-Lmo" secondAttribute="trailing" constant="10" id="7tr-05-o6p"/>
+                            <constraint firstItem="Gse-bB-ZVg" firstAttribute="leading" secondItem="8Ya-XJ-Bxv" secondAttribute="leading" id="Afq-mO-V71"/>
+                            <constraint firstItem="QYN-o7-Lmo" firstAttribute="leading" secondItem="hzg-IB-Q31" secondAttribute="leading" constant="10" id="IWT-zR-T3y"/>
+                            <constraint firstItem="d5d-Ro-MV8" firstAttribute="trailing" secondItem="hzg-IB-Q31" secondAttribute="trailing" id="Lno-g2-EjI"/>
+                            <constraint firstItem="d5d-Ro-MV8" firstAttribute="top" secondItem="8Ya-XJ-Bxv" secondAttribute="top" constant="20" id="ghS-F3-Tcu"/>
+                            <constraint firstItem="d5d-Ro-MV8" firstAttribute="leading" secondItem="hzg-IB-Q31" secondAttribute="leading" id="hJb-nZ-HCx"/>
+                            <constraint firstAttribute="trailing" secondItem="Gse-bB-ZVg" secondAttribute="trailing" id="l2O-4f-Z4T"/>
+                            <constraint firstItem="QYN-o7-Lmo" firstAttribute="top" secondItem="d5d-Ro-MV8" secondAttribute="bottom" constant="30" id="tHu-GY-y8W"/>
+                            <constraint firstItem="Gse-bB-ZVg" firstAttribute="top" secondItem="8Ya-XJ-Bxv" secondAttribute="top" id="uRg-Gz-ybk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hzg-IB-Q31"/>
+                    </view>
+                    <connections>
+                        <outlet property="txtCounterList" destination="Ag5-IZ-Jzs" id="Pwt-PR-6Tt"/>
+                        <outlet property="txtLocationList" destination="YS0-GU-hiM" id="wL1-gS-lwQ"/>
+                        <outlet property="txtTabletList" destination="84b-vx-Xc8" id="dtZ-R4-4gZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dIu-Yx-HI3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2385.9375" y="322.8515625"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Logo" width="300" height="47"/>
