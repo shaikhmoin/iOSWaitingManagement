@@ -29,6 +29,9 @@ struct CONSTANTS {
     static let IPADDRESS = "IPADDRESS"
     static let SELECTEDTABDETAIL = "SELECTEDTABDETAIL"
     static let TABLETDATA = "TABLETDATA"
+    static let LOCATIONID = "LOCATIONID"
+    static let COUNTERID = "COUNTERID"
+    static let TABLETID = "TABLETID"
     
     //MARK: Local APP ID & Secret
     static let appId  = "f73952739412294a1951df7dd11fa3d3"
@@ -48,7 +51,7 @@ struct CONSTANTS {
     struct APINAME {
         static let checkIPAddressOrGetLocation = "GetAllDataDataSet"
         static let GetLoginDet = "GetLoginDet"
-        static let GetFloorListOrDevice = "GetAllJsonData"
+        static let GetAllJsonData = "GetAllJsonData"
         static let GetTableList = "GetTables"
     }
     
@@ -197,30 +200,51 @@ class ResolutePOS: NSObject {
     }
     
     class func getServer() -> String {
-        var str : String = ""
+        var strResult : String = ""
         if let strServer = UserDefaults.standard.object(forKey: CONSTANTS.SERVER){
-            str = strServer as! String
+            strResult = strServer as! String
         }
-        else {
-            // not exist
-        }
-        return str
+        return strResult
     }
     
     class func getTabDetail() -> String {
-        var str : String = ""
+        var strResult : String = ""
         if let strTabDet = UserDefaults.standard.object(forKey: CONSTANTS.SELECTEDTABDETAIL){
-            str = strTabDet as! String
+            strResult = strTabDet as! String
         }
-        else {
-            // not exist
-        }
-        return str
+        return strResult
     }
     
     class func getDeviceID() -> String {
-        let strDeviceID : String = UserDefaults.standard.object(forKey: CONSTANTS.DEVICEID) as! String
-        return strDeviceID
+        var strResult : String = ""
+        if let strDeviceID = UserDefaults.standard.object(forKey: CONSTANTS.DEVICEID){
+            strResult = strDeviceID as! String
+        }
+        return strResult
+    }
+    
+    class func getLocationID() -> Int {
+        var strResult : Int = 0
+        if let strLocationID = UserDefaults.standard.object(forKey: CONSTANTS.LOCATIONID){
+            strResult = strLocationID as! Int
+        }
+        return strResult
+    }
+    
+    class func getCounterID() -> Int {
+        var strResult : Int = 0
+        if let strCounterID = UserDefaults.standard.object(forKey: CONSTANTS.COUNTERID){
+            strResult = strCounterID as! Int
+        }
+        return strResult
+    }
+    
+    class func getTabletID() -> Int {
+        var strResult : Int = 0
+        if let strTabletID = UserDefaults.standard.object(forKey: CONSTANTS.TABLETID){
+            strResult = strTabletID as! Int
+        }
+        return strResult
     }
     
     class func getOrderMenu() -> [String] {
@@ -321,11 +345,10 @@ class ResolutePOS: NSObject {
         return nil
     }
     
-    
-    //MARK:- Helper for get Json String from Dict[{"DeviceID" : "6E43B9E1-4406-46A9-A705-77F975E951FB","TabID" : 10}]
+    //MARK:- Helper for get Json String from Dict
     static func getJsonStringByDictionary(dict:[String:AnyObject]) -> String {
         let jsonData: Data? = try? JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions(rawValue: 1))
-        return String(data: jsonData!, encoding: .utf8)!
+        return String(data: jsonData!, encoding: .utf8)! //[{"DeviceID" : "6E43B9E1-4406-46A9-A705-77F975E951FB","TabID" : 10}]
     }
     
     class func getcurrentDate() -> String {

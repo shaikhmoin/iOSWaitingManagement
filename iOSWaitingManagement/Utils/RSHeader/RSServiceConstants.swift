@@ -186,12 +186,6 @@ class ServiceManager: NSObject {
                     var result2 = response.result.value
                     print("RESULT",result)
                     
-//                    let d  = try Data(response.result.value.utf8)
-//                    let xml = XMLParser(data: d)
-//                    print(xml)
-//                    xml.delegate = self
-//                    xml.parse()
-                    
                     //let status : String = ResolutePOS.object_forKeyWithValidationForClass_String(dict: result, key: "status")
                     //let code : String = ResolutePOS.object_forKeyWithValidationForClass_String(dict: result, key: "code")
                     

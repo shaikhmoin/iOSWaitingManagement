@@ -399,7 +399,7 @@ class RSTextField: UITextField, UITextFieldDelegate,UIPickerViewDataSource,UIPic
             let dict : [String : AnyObject] = aryCounterList[0] as! [String : AnyObject]
             APPDELEGATE.strSelectedCounterID = (dict["CounterID"] as? Int)!
             self.text = dict["CounterName"] as? String
-            
+
             if APPDELEGATE.strSelectedCounterID != 0 {
                 if self.didSelectCounter != nil {
                     //self.didSelectCounter(APPDELEGATE.strSelectedCounterID)

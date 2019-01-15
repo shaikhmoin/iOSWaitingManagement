@@ -4,7 +4,6 @@
 //
 //  Created by Akash on 1/7/19.
 //  Copyright © 2019 Moin. All rights reserved.
-//
 
 import UIKit
 import Alamofire
@@ -87,9 +86,9 @@ class LocationAndCounterViewController: UIViewController,XMLParserDelegate {
             
         } else if self.txtTabletList.text == "" {
             RSAlertUtils.displayAlertWithMessage("Please select tablet first!")
-    
-    }
-    
+            
+        }
+            
         else {
             self.serviceCallForSaveDataToDeviceRegistration()
         }
@@ -141,24 +140,15 @@ class LocationAndCounterViewController: UIViewController,XMLParserDelegate {
             self.strChkXML = "RegisterDeviceListAPI"
             finalVal = ""
             
-//            print(APPDELEGATE.strSelectedLocationID)
-//            let locID : String! = ("{LOCATIONID:\(strLocationID)}")
-//            print(locID)
-//
-//            //Append LocID into Array like [{LOCATIONID:1}]
-//            var arrVal : [AnyObject] = [AnyObject]()
-//            arrVal.append(locID as AnyObject)
-//            print(arrVal)
-            
             var dicJ : [String:AnyObject] = [:]
             dicJ["LOCATIONID"] = strLocationID as AnyObject
             print(dicJ) //{"LOCATIONID" : "1"}
-
+            
             //Get JsonString From Dict
             let strResult = ResolutePOS.getJsonStringByDictionary(dict: dicJ)
             print(strResult) //[{"DeviceID" : "6E43B9E1-4406-46A9-A705-77F975E951FB","TabID" : 10}]
-
-            let strUrl : String = CONSTANTS.APINAME.GetFloorListOrDevice
+            
+            let strUrl : String = CONSTANTS.APINAME.GetAllJsonData
             print("URL",strUrl)
             
             let headers: HTTPHeaders = [:]
@@ -195,7 +185,7 @@ class LocationAndCounterViewController: UIViewController,XMLParserDelegate {
     //MARK:- Service call for Save Data To Device Registration
     func serviceCallForSaveDataToDeviceRegistration() {
         if IS_INTERNET_AVAILABLE() {
-            
+
             self.strChkXML = "SaveDataToDeviceRegistrationAPI"
             finalVal = ""
             
@@ -205,12 +195,12 @@ class LocationAndCounterViewController: UIViewController,XMLParserDelegate {
             dicJ["TabID"] = APPDELEGATE.strSelectedTabletID as AnyObject
             dicJ["DeviceID"] = strDeviceid as AnyObject
             print(dicJ) //{"DeviceID" : "6E43B9E1-4406-46A9-A705-77F975E951FB","TabID" : 10}
-
+            
             //Get JsonString From Dict
             let strResult = ResolutePOS.getJsonStringByDictionary(dict: dicJ)
             print(strResult) //[{"DeviceID" : "6E43B9E1-4406-46A9-A705-77F975E951FB","TabID" : 10}]
-
-            let strUrl : String = CONSTANTS.APINAME.GetFloorListOrDevice
+            
+            let strUrl : String = CONSTANTS.APINAME.GetAllJsonData
             print("URL",strUrl)
             
             let headers: HTTPHeaders = [:]
@@ -241,8 +231,6 @@ class LocationAndCounterViewController: UIViewController,XMLParserDelegate {
         } else {
             RSAlertUtils.displayNoInternetMessage()
         }
-        //"TabID" : 10,
-        //"DeviceID" : "8FEC9459-E1F7-4719-BF5C-1961FCD13AD9"
     }
     
     //MARK:- XML Methods
@@ -301,17 +289,20 @@ class LocationAndCounterViewController: UIViewController,XMLParserDelegate {
                         if strResult == "1" {
                             print(APPDELEGATE.dictSelectedTab)
                             UserDefaultFunction.setCustomDictionary(dict: APPDELEGATE.dictSelectedTab, key: CONSTANTS.SELECTEDTABDETAIL)
-                         
+                            
                             UserDefaults.standard.set(strDeviceid, forKey: CONSTANTS.DEVICEID)
-
-                            let alert = UIAlertController(title: "Resolute Pos", message: "Wait Till Device Get Approved.", preferredStyle: .alert)
+                            UserDefaults.standard.set(APPDELEGATE.strSelectedLocationID, forKey: CONSTANTS.LOCATIONID)
+                            UserDefaults.standard.set(APPDELEGATE.strSelectedCounterID, forKey: CONSTANTS.COUNTERID)
+                            UserDefaults.standard.set(APPDELEGATE.strSelectedTabletID, forKey: CONSTANTS.TABLETID)
+                            
+                            let alert = UIAlertController(title: "Resolute Pos", message: "Please Wait Till Device Get Approved.", preferredStyle: .alert)
                             
                             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
                                 exit(0)
                             }))
                             self.present(alert, animated: true)
                         }
-                       
+                        
                     } else {
                         RSAlertUtils.displayAlertWithMessage("Sorry, No Records Found.")
                     }

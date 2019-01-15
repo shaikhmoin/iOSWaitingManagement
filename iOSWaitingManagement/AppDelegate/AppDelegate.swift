@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sqlite3_open(fileURL.path, &db)
         
         //CREATE ORDER CART DETAIL TABLE
-        sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS CustomerMaster (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, ContactNo TEXT,NoOfPax TEXT,IsAssign TEXT)", nil, nil, nil)
+        sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS CustomerMaster (ID INTEGER PRIMARY KEY AUTOINCREMENT,customerActID TEXT,WaitingID TEXT, Name TEXT, ContactNo TEXT,NoOfPax TEXT,IsAssign TEXT)", nil, nil, nil)
     }
     
     func openLoginPage()  {

@@ -4,7 +4,6 @@
 //
 //  Created by Akash on 12/29/18.
 //  Copyright © 2018 Moin. All rights reserved.
-//
 
 import UIKit
 import Alamofire
@@ -21,10 +20,12 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
     var strChkXML : String = ""
     var strResult = ""
     var finalVal : String = ""
-
+    var selectedWaitingID : String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(selectedWaitingID)
         cltnTableList.dataSource = self
         cltnTableList.delegate = self
         
@@ -78,6 +79,17 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
     //MARK:- UiCollection view Delegates Methods
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        if collectionView == cltnTableList {
+            if aryGloblalTableList.count > 0 {
+                let dictItem : [String:AnyObject] = aryGloblalTableList[indexPath.row] as! [String:AnyObject]
+                print(dictItem)
+               
+                let tableID : String = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dictItem, key: "TableID")
+
+                self.serviceCallForAssignTable(waitingID: selectedWaitingID, tableID: tableID)
+
+            }
+        }
     }
     
     //MARK:- UICollectionview Flowlayout Methods
@@ -103,8 +115,11 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
             self.strChkXML = "FloorListAPI"
             finalVal = ""
             
-            let locID = ("{LOCATIONID:\(1)")
-            let CountID = ("COUNTERID:\(1)}")
+//            let locID = ("{LOCATIONID:\(1)")
+//            let CountID = ("COUNTERID:\(1)}")
+            
+            let locID = ("{LOCATIONID:\(ResolutePOS.getLocationID())")
+            let CountID = ("COUNTERID:\(ResolutePOS.getCounterID())}")
             
             //PinID And Loc ID for combine values like dict
             var name = ""
@@ -116,7 +131,7 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
             arrVal.append(name as AnyObject)
             print(arrVal)
             
-            let strUrl : String = CONSTANTS.APINAME.GetFloorListOrDevice
+            let strUrl : String = CONSTANTS.APINAME.GetAllJsonData
             print("URL",strUrl)
             
             let headers: HTTPHeaders = [:]
@@ -162,7 +177,8 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
             let headers: HTTPHeaders = [:]
             
             var parameter : [String:AnyObject] = [:]
-            parameter["LocationID"] = "1" as AnyObject
+            //parameter["LocationID"] = "1" as AnyObject
+            parameter["LocationID"] = ResolutePOS.getLocationID() as AnyObject
             parameter["FloorID"] = APPDELEGATE.strSelectedFloorID as AnyObject
             parameter["Procedure"] = "TabOrder_Get_Table_IDWise" as AnyObject
             print("PARAM",parameter)
@@ -190,9 +206,57 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
         }
     }
     
+    //MARK:- Service Call For Assign Table
+    func serviceCallForAssignTable(waitingID:String,tableID:String) {
+        if IS_INTERNET_AVAILABLE() {
+            
+            self.strChkXML = "AssignTableAPI"
+            finalVal = ""
+     
+            var dicJ : [String:AnyObject] = [:]
+            dicJ["WaitingID"] = waitingID as AnyObject
+            dicJ["TableID"] = tableID as AnyObject
+            print(dicJ) //["WaitingID" : 1,"TableID" : 1]
+            
+            //Get JsonString From Dict
+            let strResult = ResolutePOS.getJsonStringByDictionary(dict: dicJ)
+            print(strResult) //{"WaitingID" : "4","TableID" : 10}
+            
+            let strUrl : String = CONSTANTS.APINAME.GetAllJsonData
+            print("URL",strUrl)
+            
+            let headers: HTTPHeaders = [:]
+            
+            var parameter : [String:AnyObject] = [:]
+            parameter["Procedure"] = "Waiting_AssginTable" as AnyObject
+            parameter["Json"] = "[\(strResult)]" as AnyObject
+            print("PARAM",parameter)
+            
+            ServiceManager.sharedManager.postResponseWithHeader(strUrl, params: parameter, headers: headers, Loader: false) { (result) in
+                print(result)  // <string xmlns="http://tempuri.org/">{"Table":[{"Column1":1}]}</string>
+                
+                do
+                {
+                    let data  = try Data(result.utf8)
+                    let xml = XMLParser(data: data)
+                    print(xml.description)
+                    print(xml)
+                    
+                    xml.delegate = self
+                    xml.parse()
+                }
+                catch
+                {
+                    RSAlertUtils.displayAlertWithMessage("Something was wrong....!")
+                }
+            }
+        } else {
+            RSAlertUtils.displayNoInternetMessage()
+        }
+    }
+    
     //MARK:- XML Methods
     func parserDidEndDocument(_ parser: XMLParser) {
-        print("Hello first")
         print(finalVal)
         
         if strChkXML == "FloorListAPI" {
@@ -211,7 +275,6 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
         }
         
         if strChkXML == "TableListAPI" {
-            print("Hello final")
             print(finalVal)
             if finalVal != "" {
                 let responseData = ResolutePOS.convertStringToDictionary(text: finalVal)!
@@ -220,7 +283,33 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
                 if (ResolutePOS.checkArray(dict: responseData, key: "Table")) {
                     
                     aryGloblalTableList = responseData["Table"] as! [AnyObject]
+                    print(aryGloblalTableList)
                     self.cltnTableList.reloadData()
+                }
+            }
+        }
+        
+        if strChkXML == "AssignTableAPI" {
+            print(finalVal)
+            if finalVal != "" {
+                let responseData = ResolutePOS.convertStringToDictionary(text: finalVal)!
+                
+                //Check Array Nil Or Not
+                if (ResolutePOS.checkArray(dict: responseData, key: "Table")) {
+                    
+                    let aryResult = responseData["Table"] as! [AnyObject]
+                    
+                    if aryResult.count > 0 {
+                        let dict : [String:AnyObject]  = aryResult[0] as! [String:AnyObject]
+                        print(dict)
+                        
+                        let strResult : String = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dict, key: "Column1")
+                        if strResult == "1" {
+                            print("Success Assign")
+                        } else {
+                            print("Something wrong into whenAssign Table operation")
+                        }
+                    }
                 }
             }
         }
@@ -232,7 +321,6 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
     }
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        print("First Check")
         print(string)
         strResult = string //{"Table":[{"FloorID":1,"FloorName":"Ground Floor","Height":"484","Width":"800"}]}
         print(strResult)

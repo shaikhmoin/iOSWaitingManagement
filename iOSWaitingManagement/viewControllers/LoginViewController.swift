@@ -4,7 +4,6 @@
 //
 //  Created by Akash on 12/27/18.
 //  Copyright © 2018 Moin. All rights reserved.
-//Moin
 
 import UIKit
 import Alamofire
@@ -290,7 +289,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
             let strResult = ResolutePOS.getJsonStringByDictionary(dict: dicJ)
             print(strResult)
             
-            let strUrl : String = CONSTANTS.APINAME.GetFloorListOrDevice
+            let strUrl : String = CONSTANTS.APINAME.GetAllJsonData
             print("URL",strUrl)
             
             let headers: HTTPHeaders = [:]
@@ -325,7 +324,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
     
     //MARK:- XML Methods
     func parserDidEndDocument(_ parser: XMLParser) {
-        print(finalVal)
+        print(finalVal) //{"Particular":[{"UserID":17,"Server":"harsan"}]}
         
         if strChkXML == "ConnectIPAPI" {
             if finalVal != "" {
@@ -351,8 +350,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
         
         if strChkXML == "LoginAPI" {
             if finalVal != "" {
+                
                 let responseData = ResolutePOS.convertStringToDictionary(text: finalVal)!
                 print(responseData)
+                
                 //Check Array Nil Or Not
                 if (ResolutePOS.checkArray(dict: responseData, key: "Particular")) {
                     
@@ -382,6 +383,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,XMLParserDelegat
                         }
                     }
                 }
+                
             } else {
                 popUpShow(popupView: viewIPAddress)
             }
