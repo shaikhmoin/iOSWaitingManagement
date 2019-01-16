@@ -68,7 +68,7 @@ struct CONSTANTS {
     static let ID_CUSTOMR_LIST_TABLE_CELL = "CustomerListTableViewCell"
     
     //MARK: UICllectionViewCell IDENTIFIER
-    static let ID_ASSIGN__TABLE_LIST_COLLECTION_CELL_IPHONE = "AssignTableCollectionViewCelliPhone"
+    static let ID_ASSIGN_TABLE_LIST_COLLECTION_CELL_IPHONE = "AssignTableCollectionViewCelliPhone"
     
     //MARK: TRY AT HOME COLORS
     static let APP_PRIMARY_MAIN_COLOR = "#006AB7"

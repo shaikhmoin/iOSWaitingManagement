@@ -29,7 +29,7 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
         cltnTableList.dataSource = self
         cltnTableList.delegate = self
         
-        self.cltnTableList.register(UINib(nibName:"AssignTableCollectionViewCelliPhone", bundle: nil), forCellWithReuseIdentifier: CONSTANTS.ID_ASSIGN__TABLE_LIST_COLLECTION_CELL_IPHONE)
+        self.cltnTableList.register(UINib(nibName:"AssignTableCollectionViewCelliPhone", bundle: nil), forCellWithReuseIdentifier: CONSTANTS.ID_ASSIGN_TABLE_LIST_COLLECTION_CELL_IPHONE)
         
         txtFloorList.setTextFieldType(tFieldType: .Floor)
         self.serviceCallForFloorList()
@@ -65,7 +65,7 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let AssignTableCell = cltnTableList.dequeueReusableCell(withReuseIdentifier: CONSTANTS.ID_ASSIGN__TABLE_LIST_COLLECTION_CELL_IPHONE, for: indexPath) as! AssignTableCollectionViewCelliPhone
+        let AssignTableCell = cltnTableList.dequeueReusableCell(withReuseIdentifier: CONSTANTS.ID_ASSIGN_TABLE_LIST_COLLECTION_CELL_IPHONE, for: indexPath) as! AssignTableCollectionViewCelliPhone
         
         AssignTableCell.applyShadowDefault()
         AssignTableCell.viewMain.applyShadowDefault()
@@ -83,11 +83,17 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
             if aryGloblalTableList.count > 0 {
                 let dictItem : [String:AnyObject] = aryGloblalTableList[indexPath.row] as! [String:AnyObject]
                 print(dictItem)
-               
+                
                 let tableID : String = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dictItem, key: "TableID")
-
-                self.serviceCallForAssignTable(waitingID: selectedWaitingID, tableID: tableID)
-
+                
+                let strOrderID : String = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dictItem, key: "OrderID")
+                print(strOrderID)
+                
+                if strOrderID == "0" || strOrderID == "" {
+                    self.serviceCallForAssignTable(waitingID: selectedWaitingID, tableID: tableID)
+                } else {
+                    RSAlertUtils.displayAlertWithMessage("Table already assigned to another customr")
+                }
             }
         }
     }
@@ -115,21 +121,14 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
             self.strChkXML = "FloorListAPI"
             finalVal = ""
             
-//            let locID = ("{LOCATIONID:\(1)")
-//            let CountID = ("COUNTERID:\(1)}")
+            var dicJ : [String:AnyObject] = [:]
+            dicJ["LOCATIONID"] = ResolutePOS.getLocationID() as AnyObject
+            dicJ["COUNTERID"] = ResolutePOS.getCounterID() as AnyObject
+            print(dicJ) //["LOCATIONID" : 1,"COUNTERID" : 1]
             
-            let locID = ("{LOCATIONID:\(ResolutePOS.getLocationID())")
-            let CountID = ("COUNTERID:\(ResolutePOS.getCounterID())}")
-            
-            //PinID And Loc ID for combine values like dict
-            var name = ""
-            name.append(locID + "," + CountID)
-            print(name)
-            
-            //Append LocID And CounterID into Array like [{LOCATIONID:1,COUNTERID:1}]
-            var arrVal : [AnyObject] = [AnyObject]()
-            arrVal.append(name as AnyObject)
-            print(arrVal)
+            //Get JsonString From Dict
+            let strResult = ResolutePOS.getJsonStringByDictionary(dict: dicJ)
+            print(strResult) //{"LOCATIONID" : "4","COUNTERID" : 10}
             
             let strUrl : String = CONSTANTS.APINAME.GetAllJsonData
             print("URL",strUrl)
@@ -138,7 +137,7 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
             
             var parameter : [String:AnyObject] = [:]
             parameter["Procedure"] = "TabOrder_Get_FloorTable" as AnyObject
-            parameter["Json"] = "\(arrVal)" as AnyObject
+            parameter["Json"] = "[\(strResult)]" as AnyObject
             print("PARAM",parameter)
             
             ServiceManager.sharedManager.postResponseWithHeader(strUrl, params: parameter, headers: headers, Loader: false) { (result) in
@@ -306,6 +305,19 @@ class AssignTableViewController: UIViewController,UICollectionViewDataSource,UIC
                         let strResult : String = ResolutePOS.object_forKeyWithValidationForClass_String(dict: dict, key: "Column1")
                         if strResult == "1" {
                             print("Success Assign")
+                            
+                            let query = String(format: "delete from CustomerMaster where WaitingID = '%@'",selectedWaitingID)
+                            print(query)
+                            
+                            let st = obj.dboperation(query: query)
+                            
+                            if st == true
+                            {
+                                print("Delete successfully")
+                                let nav = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                                self.navigationController?.pushViewController(nav, animated: true)
+                            }
+                            
                         } else {
                             print("Something wrong into whenAssign Table operation")
                         }
